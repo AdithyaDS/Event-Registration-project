@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Register — Event</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="bg-primary text-white py-3 mb-4">
+    <div class="container d-flex justify-content-between align-items-center">
+      <h1 class="h4 mb-0">Event Registration</h1>
+      <a href="{{ url_for('home') }}" class="btn btn-light btn-sm">Home</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="row justify-content-center">
+      <div class="col-md-8">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, msg in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ msg }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title mb-3">Register for Event</h2>
+
+            <form id="regForm" action="{{ url_for('submit') }}" method="post" novalidate>
+              <div class="mb-3">
+                <label for="name" class="form-label">Full name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Your full name" required>
+                <div class="invalid-feedback">Name is required.</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
+                <div class="invalid-feedback">Please enter a valid email.</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone (optional)</label>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="10 digits">
+                <div class="invalid-feedback">Phone must be 10 digits.</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="event_type" class="form-label">Event type</label>
+                <select class="form-select" id="event_type" name="event_type" required>
+                  <option value="">-- Choose an event --</option>
+                  <option value="Workshop - Web Dev">Workshop - Web Dev</option>
+                  <option value="Workshop - Data Science">Workshop - Data Science</option>
+                  <option value="Seminar - AI Ethics">Seminar - AI Ethics</option>
+                </select>
+                <div class="invalid-feedback">Please select an event.</div>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Submit Registration</button>
+                <button type="reset" class="btn btn-outline-secondary">Reset</button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
