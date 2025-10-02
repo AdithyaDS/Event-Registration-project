@@ -1,0 +1,7 @@
+/* Minimal overrides and spacing */
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+.card-title { margin-bottom: 0.75rem; }
+header .container { display: flex; align-items: center; justify-content: space-between; }
+.invalid-feedback { display: none; } /* we manage these with JS */
